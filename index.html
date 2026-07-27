@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知行录 - 行走与思考</title>
+    <meta name="description" content="个人博客，记录旅途见闻与经济学思考">
+    <link rel="stylesheet" href="css/style.css?v=20260727">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#/" class="nav-brand">知行录</a>
+            <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#/" class="nav-link" data-route="/">首页</a></li>
+                <li><a href="#/tags" class="nav-link" data-route="/tags">标签</a></li>
+                <li><a href="#/about" class="nav-link" data-route="/about">关于</a></li>
+            </ul>
+            <button class="nav-admin-btn" id="adminBtn" title="管理员登录">🔒</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="app">
+        <div class="loading">
+            <div class="loading-spinner"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2026 知行录 · 行万里路，读万卷书</p>
+        </div>
+    </footer>
+
+    <!-- Admin Login Modal -->
+    <div class="modal-overlay" id="loginModal" style="display:none;">
+        <div class="modal" id="loginBox">
+            <button class="modal-close" onclick="adminUI.closeLogin()">&times;</button>
+            <div class="modal-icon">🔐</div>
+            <h2 class="modal-title" id="loginTitle">管理员登录</h2>
+            <p class="modal-desc" id="loginDesc">输入密码进入编辑模式</p>
+            <form id="loginForm" onsubmit="return false;">
+                <input type="password" class="modal-input" id="loginPassword" placeholder="请输入密码" autocomplete="off">
+                <p class="modal-error" id="loginError"></p>
+                <button type="submit" class="modal-btn-primary" id="loginSubmit">登 录</button>
+            </form>
+            <p class="modal-switch" id="loginSwitch"></p>
+        </div>
+    </div>
+
+    <!-- Editor Modal -->
+    <div class="modal-overlay" id="editorModal" style="display:none;">
+        <div class="modal modal-editor" id="editorBox">
+            <div class="modal-editor-header">
+                <h2 id="editorTitle">编辑文章</h2>
+                <button class="modal-close" onclick="adminUI.closeEditor()">&times;</button>
+            </div>
+            <form id="editorForm" onsubmit="return false;">
+                <div class="form-group">
+                    <label class="form-label">文章标题</label>
+                    <input type="text" class="form-input" id="editTitle" placeholder="输入文章标题...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">封面图片 URL</label>
+                    <input type="text" class="form-input" id="editCover" placeholder="输入图片链接...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">摘要</label>
+                    <input type="text" class="form-input" id="editExcerpt" placeholder="简短描述这篇文章...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">日期</label>
+                    <input type="date" class="form-input" id="editDate">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">标签（多选）</label>
+                    <div class="form-tags" id="editTags"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">正文（Markdown 格式）</label>
+                    <div class="editor-tabs">
+                        <button type="button" class="editor-tab active" data-tab="write">✏️ 编辑</button>
+                        <button type="button" class="editor-tab" data-tab="preview">👁 预览</button>
+                    </div>
+                    <textarea class="form-textarea" id="editContent" placeholder="用 Markdown 格式写文章..."></textarea>
+                    <div class="editor-preview markdown-content" id="editPreview" style="display:none;"></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="modal-btn-secondary" onclick="adminUI.closeEditor()">取消</button>
+                    <button type="submit" class="modal-btn-primary" id="editSave">💾 保存文章</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- GitHub Config Modal -->
+    <div class="modal-overlay" id="githubConfigModal" style="display:none;">
+        <div class="modal modal-editor" style="max-width:520px;">
+            <div class="modal-editor-header">
+                <h2>⚙️ 配置 GitHub 一键发布</h2>
+                <button class="modal-close" onclick="githubConfigUI.close()">&times;</button>
+            </div>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:18px;">
+                配置后，在网页中编辑文章点击「保存」即可自动发布，几秒后全网可见。
+            </p>
+            <div class="form-group">
+                <label class="form-label">GitHub 用户名</label>
+                <input type="text" class="form-input" id="ghOwner" placeholder="你的 GitHub 用户名">
+            </div>
+            <div class="form-group">
+                <label class="form-label">仓库名</label>
+                <input type="text" class="form-input" id="ghRepo" placeholder="例如 my-blog">
+            </div>
+            <div class="form-group">
+                <label class="form-label">分支名</label>
+                <input type="text" class="form-input" id="ghBranch" placeholder="main" value="main">
+            </div>
+            <div class="form-group">
+                <label class="form-label">
+                    Personal Access Token
+                    <a href="https://github.com/settings/tokens/new?scopes=repo&description=blog-publish" target="_blank" style="font-weight:400;color:var(--accent);font-size:0.8rem;">
+                        （帮我创建一个）
+                    </a>
+                </label>
+                <input type="password" class="form-input" id="ghToken" placeholder="ghp_xxxxxxxxxxxx">
+            </div>
+            <p class="modal-error" id="ghStatus"></p>
+            <div class="form-actions">
+                <button type="button" class="modal-btn-secondary" onclick="githubConfigUI.disconnect()" style="margin-right:auto;">断开连接</button>
+                <button type="button" class="modal-btn-secondary" onclick="githubConfigUI.test()">🔍 测试连接</button>
+                <button type="button" class="modal-btn-primary" style="width:auto;margin-top:0;" onclick="githubConfigUI.save()">💾 保存配置并同步</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/data.js?v=20260727"></script>
+    <script src="js/auth.js?v=20260727"></script>
+    <script src="js/github.js?v=20260727"></script>
+    <script src="js/store.js?v=20260727"></script>
+    <script src="js/app.js?v=20260727"></script>
+</body>
+</html>
