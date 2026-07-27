@@ -9,6 +9,54 @@
   },
   "posts": [
     {
+      "id": 1785148480698,
+      "title": "失败",
+      "slug": "失败-ms33bb96",
+      "date": "2026-07-27",
+      "tags": [
+        "economics"
+      ],
+      "cover": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+      "excerpt": "失败的构建网站尝试，真是废物的人生啊...",
+      "content": "失败的构建网站尝试，真是废物的人生啊"
+    },
+    {
+      "id": 1784807944009,
+      "title": "临榆炸鸡腿",
+      "slug": "临榆炸鸡腿-mrxgkfgq",
+      "date": "2026-07-23",
+      "tags": [
+        "food"
+      ],
+      "cover": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+      "excerpt": "吃了两次，第一次是香骨鸡、地瓜条和鸡腿，第二次是鸡腿和鸡条，还是只有鸡腿和地瓜条好吃，别的都是硬且难嚼，价格也不便宜，还是少吃。...",
+      "content": "*吃了两次，第一次是香骨鸡、地瓜条和鸡腿，第二次是鸡腿和鸡条，还是只有鸡腿和地瓜条好吃，别的都是硬且难嚼，价格也不便宜，还是少吃。*"
+    },
+    {
+      "id": 1784802327720,
+      "title": "啊啊啊",
+      "slug": "啊啊啊-mrxd81wo",
+      "date": "2026-07-23",
+      "tags": [
+        "travel"
+      ],
+      "cover": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+      "excerpt": "现在能不能看到这些字，饿死了，花了好几个小时，之后还得改，真是困难啊...",
+      "content": "现在能不能看到这些字，饿死了，花了好几个小时，之后还得改，真是困难啊"
+    },
+    {
+      "id": 1784800713323,
+      "title": "留下",
+      "slug": "留下-mrxc9g8b",
+      "date": "2026-07-23",
+      "tags": [
+        "travel"
+      ],
+      "cover": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+      "excerpt": "在不在...",
+      "content": "在不在"
+    },
+    {
       "id": 1,
       "title": "京都的「慢经济」——从茶道看时间价值的另一种可能",
       "slug": "kyoto-slow-economy",
